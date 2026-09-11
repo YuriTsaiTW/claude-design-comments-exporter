@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- 背景：Claude 橘（#D97757）圓角方塊 -->
+  <rect width="1024" height="1024" rx="225" fill="#D97757"/>
+  <!-- 對話泡泡 -->
+  <rect x="164" y="205" width="696" height="512" rx="123" fill="#FFFFFF"/>
+  <polygon points="287,697 246,881 471,697" fill="#FFFFFF"/>
+  <!-- 匯出箭頭 -->
+  <rect x="474" y="297" width="77" height="246" rx="38" fill="#D97757"/>
+  <polygon points="358,522 666,522 512,655" fill="#D97757"/>
+  <rect x="338" y="596" width="348" height="77" rx="38" fill="#D97757"/>
+</svg>

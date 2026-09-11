@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Comments Exporter for Claude Design</title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <main class="popup">
+      <h1 class="title">Comments Exporter for Claude Design</h1>
+      <p id="hint" class="hint" aria-live="polite">檢查目前分頁…</p>
+      <button id="export" type="button" class="button" disabled>
+        下載 zip + comments
+      </button>
+      <section
+        id="status"
+        class="status"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></section>
+      <button id="reset" type="button" class="link" hidden>再匯出一次</button>
+    </main>
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>

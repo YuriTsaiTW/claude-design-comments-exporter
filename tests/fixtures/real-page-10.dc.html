@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/viewsonic-design-system-v1-0-0-b9dd1e09-f04f-4824-9ec9-3fff6e0ae44c/colors_and_type.css">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:#e7e5df;}
+  a{color:#4848f0;} a:hover{color:#3b3bd1;}
+  @keyframes gIn {from{transform:translateY(10px); opacity:0;}to{transform:translateY(0); opacity:1;}}
+  @keyframes gSpin {to{transform:rotate(360deg);}}
+  @keyframes gPulse {0%,100%{opacity:.4; transform:scale(1);}50%{opacity:1; transform:scale(1.3);}}
+</style>
+</helmet>
+
+<div data-vsds-kit="classswift-hub" style="display:flex; flex-direction:column; height:100vh; font-family:var(--vsds-foun-font-family-sans); overflow:hidden;">
+
+  <div style="flex:none; background:#16162b; color:#fff; display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; padding:8px 16px;">
+    <span style="font-size:12px; font-weight:700; letter-spacing:.08em; color:#9191f6; margin-right:auto;">訪客班級 GUEST CLASS · PROTOTYPE</span>
+    <sc-for list="{{ stepChips }}" as="c" hint-placeholder-count="4">
+      <div onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</div>
+    </sc-for>
+  </div>
+
+  <div style="flex:1; min-height:0; display:flex;">
+
+    <div style="flex:1; min-width:0; display:flex; flex-direction:column; background:#f6f6f6; overflow:hidden;">
+
+      <div style="flex:none; height:56px; background:#fff; border-bottom:1px solid #e6e8f1; display:flex; align-items:center; justify-content:space-between; padding:0 18px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          <img src="uploads/myViewBoard_v3_A.png" alt="myViewBoard" style="height:30px; width:auto; object-fit:contain;">
+          <span style="display:inline-flex; align-items:center; height:20px; padding:0 9px; border-radius:9999px; background:#ededfd; color:#3b3bd1; font-size:11px; font-weight:800; letter-spacing:.07em;">GUEST</span>
+        </div>
+        <span style="font-size:13px; font-weight:700; color:#9a9ab0;">{{ headerRight }}</span>
+      </div>
+
+      <div style="flex:1; min-height:0; overflow:auto; display:flex; align-items:center; justify-content:center; padding:28px 20px;">
+
+        <sc-if value="{{ atEntry }}" hint-placeholder-val="{{ false }}">
+          <div style="width:100%; max-width:420px; background:#fff; border:1px solid #ececf3; border-radius:18px; padding:26px; display:flex; flex-direction:column; align-items:center; gap:16px; animation:gIn .24s ease-out both;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <span style="font-size:22px; font-weight:800; color:#16162b; letter-spacing:-.01em;">Join your class</span>
+              <span style="font-size:14px; line-height:1.55; color:#6a6a80; text-align:center; text-wrap:pretty; max-width:34ch;">Type the class code your teacher shows on the board. No account needed.</span>
+            </div>
+            <div style="width:100%; display:flex; flex-direction:column; gap:7px;">
+              <span style="font-size:11px; font-weight:800; letter-spacing:.08em; color:#9a9ab0;">CLASS CODE</span>
+              <input value="{{ code }}" onChange="{{ onCode }}" placeholder="0000 0000" inputMode="numeric" style="{{ codeInputStyle }}">
+            </div>
+            <div onClick="{{ submitCode }}" style="{{ joinBtnStyle }}">Join class</div>
+            <span style="font-size:12.5px; color:#a4a4b8;">The code is on the classroom screen — 8 digits.</span>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ atChecking }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center;">
+            <span style="width:46px; height:46px; border-radius:50%; border:4px solid #dcdcf8; border-top-color:#4848f0; animation:gSpin .9s linear infinite;"></span>
+            <div style="display:flex; flex-direction:column; gap:5px;">
+              <span style="font-size:19px; font-weight:800; color:#16162b;">Joining History 302…</span>
+              <span style="font-size:14px; color:#6a6a80;">Getting the classroom ready</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ atIdentify }}" hint-placeholder-val="{{ true }}">
+          <div style="width:100%; max-width:520px; background:#fff; border:1px solid #ececf3; border-radius:18px; padding:26px; display:flex; flex-direction:column; gap:16px; animation:gIn .24s ease-out both;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
+                <img src="uploads/user-document.svg" alt="" style="width:26px; height:26px; flex:none;">
+                <span style="font-size:21px; font-weight:700; color:#16162b; letter-spacing:-.01em;">Pick your character to join</span>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:9px;">
+              <sc-for list="{{ avatars }}" as="a" hint-placeholder-count="18">
+                <div onClick="{{ a.onClick }}" style="{{ a.style }}">
+                  <img src="{{ a.img }}" alt="{{ a.label }}" style="width:26px; height:26px; flex:none;">
+                  <span style="{{ a.labelStyle }}">{{ a.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <sc-if value="{{ hasFace }}" hint-placeholder-val="{{ true }}">
+              <div style="position:relative; display:flex; flex-direction:column; gap:9px; background:#f7f7ff; border:1.6px solid #4848f0; border-radius:14px; padding:14px 16px; animation:gIn .2s ease-out both;">
+                <span style="position:absolute; top:-7px; left:50%; width:11px; height:11px; background:#f7f7ff; border-left:1.6px solid #4848f0; border-top:1.6px solid #4848f0; transform:translateX(-50%) rotate(45deg);"></span>
+                <span style="font-size:11px; font-weight:700; letter-spacing:.08em; color:#4848f0;">Your name in class</span>
+                <div style="display:flex; align-items:center; gap:5px;">
+                  <span style="flex:none; width:50px; height:50px; display:flex; align-items:center; justify-content:center;"><img src="{{ meFaceImg }}" alt="" style="width:34px; height:34px;"></span>
+                  <div style="flex:1; min-width:0; display:flex; align-items:center; height:50px; padding-right:6px; border-radius:12px; border:1.6px solid #E5E5E5; background:#fff;">
+                  <input value="{{ name }}" onChange="{{ onName }}" placeholder="Type your name…" style="{{ nameInputStyle }}">
+                  <div onClick="{{ shuffleName }}" title="Try another name" style="flex:none; width:36px; height:36px; border-radius:9999px; border:none; background:transparent; display:flex; align-items:center; justify-content:center; cursor:pointer;" style-hover="background:#ededfd;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5.6307 9.43099C6.65742 6.9121 9.14597 5.1332 12.055 5.1332C14.5184 5.1332 16.6802 6.40895 17.9081 8.32902H14.8794C14.4376 8.32902 14.0794 8.6872 14.0794 9.12902C14.0794 9.57085 14.4376 9.92902 14.8794 9.92902H19.6752C20.1171 9.92902 20.4752 9.57085 20.4752 9.12902V4.3332C20.4752 3.89138 20.1171 3.5332 19.6752 3.5332C19.2334 3.5332 18.8752 3.89138 18.8752 4.3332V6.92045C17.3191 4.86293 14.8427 3.5332 12.055 3.5332C8.47855 3.5332 5.41481 5.72174 4.14906 8.82706C3.98229 9.2362 4.17877 9.70308 4.58792 9.86985C4.99706 10.0366 5.46393 9.84013 5.6307 9.43099Z" fill="#4848f0"></path><path d="M11.9476 19.1993C14.8566 19.1993 17.3452 17.4204 18.3719 14.9015C18.5386 14.4924 19.0055 14.2959 19.4147 14.4627C19.8238 14.6294 20.0203 15.0963 19.8535 15.5055C18.5878 18.6108 15.524 20.7993 11.9476 20.7993C9.15985 20.7993 6.68344 19.4696 5.12734 17.4121V19.9993C5.12734 20.4411 4.76917 20.7993 4.32734 20.7993C3.88552 20.7993 3.52734 20.4411 3.52734 19.9993V15.2035C3.52734 14.7617 3.88552 14.4035 4.32734 14.4035H9.12316C9.56499 14.4035 9.92316 14.7617 9.92316 15.2035C9.92316 15.6453 9.56499 16.0035 9.12316 16.0035H6.0945C7.32242 17.9236 9.48419 19.1993 11.9476 19.1993Z" fill="#4848f0"></path></svg>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <div onClick="{{ confirmIdentity }}" style="{{ identityBtnStyle }}">{{ identityBtnLabel }}</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ atInClass }}" hint-placeholder-val="{{ false }}">
+          <div style="width:100%; max-width:400px; background:#fff; border:1px solid #ececf3; border-radius:18px; padding:26px; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; animation:gIn .24s ease-out both;">
+            <div style="width:64px; height:64px; border-radius:50%; background:#ededfd; display:flex; align-items:center; justify-content:center;"><img src="{{ meFaceImg }}" alt="" style="width:36px; height:36px;"></div>
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:20px; font-weight:800; color:#16162b;">Hi, {{ meName }}!</span>
+              <span style="font-size:13px; color:#9a9ab0;">History 302 · Ms. Smith</span>
+            </div>
+            <div style="display:flex; gap:7px; padding:6px 0;">
+              <span style="width:8px; height:8px; border-radius:50%; background:#4848f0; animation:gPulse 1.2s ease-in-out infinite;"></span>
+              <span style="width:8px; height:8px; border-radius:50%; background:#4848f0; animation:gPulse 1.2s ease-in-out .2s infinite;"></span>
+              <span style="width:8px; height:8px; border-radius:50%; background:#4848f0; animation:gPulse 1.2s ease-in-out .4s infinite;"></span>
+            </div>
+            <span style="font-size:15px; font-weight:700; color:#3a3a52; text-wrap:pretty;">You're in — waiting for your teacher to send the first question</span>
+            <span style="font-size:13px; color:#9a9ab0;">23 classmates are in the room</span>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+
+    <div style="flex:none; width:290px; background:#fff; border-left:1px solid #e6e8f1; display:flex; flex-direction:column; overflow:auto;">
+      <div style="padding:16px 18px 10px; display:flex; flex-direction:column; gap:3px;">
+        <span style="font-size:11px; font-weight:800; letter-spacing:.08em; color:#9a9ab0;">FLOW</span>
+        <span style="font-size:15px; font-weight:800; color:#16162b;">訪客班級流程</span>
+        <span style="font-size:12px; line-height:1.5; color:#9a9ab0; text-wrap:pretty;">One-time class · 學生不需登入，以名字或角色識別身分。</span>
+      </div>
+      <div style="padding:0 12px 18px; display:flex; flex-direction:column; gap:4px;">
+        <sc-for list="{{ flowNodes }}" as="n" hint-placeholder-count="4">
+          <div style="{{ n.style }}">
+            <span style="{{ n.numStyle }}">{{ n.num }}</span>
+            <div style="min-width:0; display:flex; flex-direction:column; gap:1px;">
+              <span style="{{ n.titleStyle }}">{{ n.title }}</span>
+              <span style="font-size:11.5px; line-height:1.45; color:#9a9ab0;">{{ n.note }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:auto; padding:14px 18px 18px; border-top:1px solid #eef0f6; display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:11px; font-weight:800; letter-spacing:.08em; color:#9a9ab0;">RELATED</span>
+        <a href="09 原型_加入班級流程 v2.dc.html" style="font-size:13px; font-weight:700; text-decoration:none;">09 加入班級流程 v2 →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1240,&quot;height&quot;:880}}">
+class Component extends DCLogic {
+  constructor(p){
+    super(p);
+    this.FE='https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/';
+    this.fe=(folder)=>this.FE+encodeURIComponent(folder)+'/Flat/'+folder.toLowerCase().replace(/ /g,'_')+'_flat.svg';
+    this.FACES=[['🦊','Fox','Fox'],['🐼','Panda','Panda'],['🐢','Turtle','Turtle'],['🐸','Frog','Frog'],['🐙','Octopus','Octopus'],['🦉','Owl','Owl'],['🐨','Koala','Koala'],['🐬','Dolphin','Dolphin'],['🦄','Unicorn','Unicorn'],['🐝','Bee','Honeybee'],['🦜','Parrot','Parrot'],['🐧','Penguin','Penguin'],['🐯','Tiger','Tiger face'],['🦁','Lion','Lion'],['🐰','Rabbit','Rabbit face'],['🐳','Whale','Spouting whale'],['🦔','Hedgehog','Hedgehog'],['🐺','Wolf','Wolf']];
+    this.ADJ=['Happy','Brave','Clever','Sunny','Kind','Speedy','Curious','Cheerful','Bright','Gentle','Lucky','Bouncy'];
+    this.STEPS=[['entry','Class code'],['identify','Identify'],['inclass','In class']];
+    const f0=this.FACES[Math.floor(Math.random()*this.FACES.length)];
+    const a0=this.ADJ[Math.floor(Math.random()*this.ADJ.length)];
+    this.state={ step:'identify', code:'', name:a0+' '+f0[1], face:f0[0], faceName:f0[1], adj:a0 };
+  }
+  componentWillUnmount(){ clearTimeout(this._t); }
+  go(step, extra){ clearTimeout(this._t); this.setState(Object.assign({step:step}, extra||{})); }
+  renderVals(){
+    const S=this.state, st=S.step;
+    const nameOk=!!(S.face&&S.name.trim());
+    const codeOk=S.code.replace(/\D/g,'').length>=8;
+    const chip=(on)=>'flex:none; white-space:nowrap; height:30px; padding:0 12px; border-radius:8px; font-size:12.5px; font-weight:600; display:flex; align-items:center; cursor:pointer; color:#dadafc; border:1px solid '+(on?'#4848f0':'#3a3a5e')+'; background:'+(on?'#2a2a8c':'transparent')+';';
+    const node=(num,title,note,active,done)=>({num:num, title:title, note:note,
+      style:'display:flex; gap:8px; padding:9px 10px; border-radius:10px; background:'+(active?'#ededfd':'transparent')+'; border:1px solid '+(active?'#c9c9f7':'transparent')+';',
+      numStyle:'flex:none; width:20px; font-size:11px; font-weight:800; color:'+(active?'#4848f0':(done?'#9a9ab0':'#c9c9d6'))+';',
+      titleStyle:'font-size:13px; font-weight:700; color:'+(active?'#2a2a8c':(done?'#3a3a52':'#9a9ab0'))+';'});
+    return {
+      stepChips:this.STEPS.map(s=>({ label:s[1], style:chip(st===s[0]||(s[0]==='entry'&&st==='checking')), onClick:()=>this.go(s[0]) })),
+      headerRight:(st==='inclass'?'History 302 · Ms. Smith':'Guest — not signed in'),
+      atEntry:st==='entry', atChecking:st==='checking', atIdentify:st==='identify',
+      atInClass:st==='inclass',
+
+      code:S.code,
+      onCode:(e)=>{ let v=e.target.value.replace(/\D/g,'').slice(0,8); if(v.length>4) v=v.slice(0,4)+' '+v.slice(4); this.setState({code:v}); },
+      codeInputStyle:'width:100%; height:52px; padding:0 16px; border-radius:12px; border:1.6px solid #E5E5E5; background:#fafafd; font-family:inherit; font-size:20px; font-weight:700; letter-spacing:.14em; color:#16162b; outline:none;',
+      joinBtnStyle:'width:100%; height:50px; border-radius:9999px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; '+(codeOk?'background:#4848f0; color:#fff; cursor:pointer;':'background:#ebebeb; color:#b2b2b2; cursor:not-allowed;'),
+      submitCode:()=>{ if(!codeOk) return; this.setState({step:'checking'}); clearTimeout(this._t); this._t=setTimeout(()=>this.go('identify'), 1200); },
+
+      hasFace:!!S.face,
+      name:S.name,
+      onName:(e)=>this.setState({name:e.target.value.slice(0,24)}),
+      nameInputStyle:'flex:1; min-width:0; height:46px; padding:0 13px; border:none; background:transparent; font-family:inherit; font-size:15px; font-weight:600; color:#16162b; outline:none;',
+      shuffleName:()=>{ if(!S.face) return; let a=S.adj; let guard=0; while(a===S.adj && guard++<20) a=this.ADJ[Math.floor(Math.random()*this.ADJ.length)]; this.setState({adj:a, name:a+' '+S.faceName}); },
+      avatars:this.FACES.map(f=>({ glyph:f[0], label:f[1], img:this.fe(f[2]),
+        onClick:()=>{ if(S.face===f[0]) return;
+          const a=this.ADJ[Math.floor(Math.random()*this.ADJ.length)]; this.setState({face:f[0], faceName:f[1], adj:a, name:a+' '+f[1]}); },
+        style:'height:66px; border-radius:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; font-size:24px; transition:border-color .15s,background .15s; cursor:pointer; background:'+(S.face===f[0]?'#f3f3fe':'#fff')+'; border:1.6px solid '+(S.face===f[0]?'#4848f0':'#E5E5E5')+';',
+        labelStyle:'font-size:10.5px; font-weight:600; color:#3b3bd1; '+(S.face===f[0]?'':'display:none;')+'' })),
+      identityBtnLabel:'Join class',
+      identityBtnStyle:'margin-top:8px; width:100%; height:50px; border-radius:9999px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; '+(nameOk?'background:#4848f0; color:#fff; cursor:pointer;':'background:#ebebeb; color:#b2b2b2; cursor:not-allowed;'),
+      confirmIdentity:()=>{ if(nameOk) this.go('inclass'); },
+
+      meFace:(S.face||'🙂'),
+      meFaceImg:(S.face?this.fe((this.FACES.find(f=>f[0]===S.face)||[,,'Fox'])[2]):this.fe('Slightly smiling face')),
+      meName:(S.name.trim()||S.faceName||'Guest'),
+
+      flowNodes:[
+        node('01','輸入班級代碼','8 位數字 · 無需帳號', st==='entry'||st==='checking', st!=='entry'),
+        node('02','選動物 → 自動命名','形容詞 + 動物名，可再編輯', st==='identify', st==='inclass'),
+        node('03','進入班級','等待老師派第一題', st==='inclass', false)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

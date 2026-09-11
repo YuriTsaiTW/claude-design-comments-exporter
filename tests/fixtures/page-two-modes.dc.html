@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><script src="./support.js"></script></head>
+<body>
+<x-dc>
+<helmet><style>*{box-sizing:border-box;}</style></helmet>
+<div id="app">
+  <div class="topbar"><sc-for list="{{ chips }}" as="c" hint-placeholder-count="2"><span class="chip">{{ c.label }}</span></sc-for></div>
+  <div class="stage">
+    <sc-if value="{{ atEntry }}" hint-placeholder-val="{{ false }}">
+      <div class="card entry">
+        <div class="row"><span class="title">Join your class</span><button class="cta">Join class</button></div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ atIdentify }}" hint-placeholder-val="{{ true }}">
+      <div class="card identify">
+        <div class="row"><span class="title">Pick your character</span><button class="cta">Continue</button></div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ atDone }}" hint-placeholder-val="{{ false }}">
+      <div class="card done">
+        <div class="row"><span class="title">{{ doneTitle }}</span><button class="cta">Leave</button></div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

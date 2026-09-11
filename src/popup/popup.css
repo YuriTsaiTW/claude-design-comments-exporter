@@ -1,0 +1,136 @@
+:root {
+  color-scheme: light dark;
+  --fg: #1a1a1a;
+  --muted: #5a5a6a;
+  --bg: #ffffff;
+  --primary: #4848f0;
+  --primary-fg: #ffffff;
+  --border: #e2e2ea;
+  --ok-bg: #edf7ee;
+  --ok-fg: #1e6b2f;
+  --err-bg: #fdecec;
+  --err-fg: #a11d1d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #f3f3f6;
+    --muted: #b0b0c0;
+    --bg: #16162b;
+    --border: #33334a;
+    --ok-bg: #143d1f;
+    --ok-fg: #b9f0c4;
+    --err-bg: #4a1414;
+    --err-fg: #ffc6c6;
+  }
+}
+
+body {
+  margin: 0;
+  width: 320px;
+  font:
+    14px/1.5 system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.hint {
+  margin: 0;
+  color: var(--muted);
+}
+
+.button {
+  font: inherit;
+  font-weight: 700;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--primary);
+  color: var(--primary-fg);
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.button:focus-visible,
+.link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.status {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+
+.status[data-kind='loading'] {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.status[data-kind='success'] {
+  background: var(--ok-bg);
+  color: var(--ok-fg);
+  border-color: transparent;
+}
+
+.status[data-kind='error'] {
+  background: var(--err-bg);
+  color: var(--err-fg);
+  border-color: transparent;
+}
+
+.spinner {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.link {
+  font: inherit;
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--primary);
+  text-decoration: underline;
+  cursor: pointer;
+}

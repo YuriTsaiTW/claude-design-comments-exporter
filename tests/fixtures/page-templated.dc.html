@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><script src="./support.js"></script></head>
+<body>
+<x-dc>
+<div style="position:relative;">
+  <sc-if value="{{ showSketchSheet }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute; inset:0; container-type:inline-size;">
+      <div style="text-align:center; font-size:2.5cqw;">{{ sheet.instr }}</div>
+      <div style="display:flex; flex-wrap:wrap;"><sc-for list="{{ sheet.words }}" as="w" hint-placeholder-count="7"><span style="font-size:2.7cqw; color:#5a7a2f;">{{ w }}</span></sc-for></div>
+    </div>
+  </sc-if>
+  <canvas id="proto-canvas" style="position:absolute; inset:0;"></canvas>
+  <div onPointerDown="{{ addStamp }}" style="{{ stampLayerStyle }}">
+    <sc-for list="{{ stamps }}" as="st" hint-placeholder-count="0">
+      <div onPointerDown="{{ st.onDown }}" style="{{ st.style }}">
+        <sc-if value="{{ st.selected }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ st.boxStyle }}"></div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
