@@ -83,14 +83,14 @@ English（另加 Traditional Chinese 語系）
 
 ## Graphics & Assets
 
-| Asset                          | Dimensions  | Status         | Filename                                                                      |
-| ------------------------------ | ----------- | -------------- | ----------------------------------------------------------------------------- |
-| Store Icon [REQUIRED]          | 128×128 PNG | ✅ Ready       | `store-assets/store-icon-128.png`（圖形 96×96 置中、16px 透明邊，依商店建議） |
-| Screenshot 1 [REQUIRED]        | 1280×800    | ⬜ Not created | `store-assets/screenshot-1-popup.png`                                         |
-| Screenshot 2 [RECOMMENDED]     | 1280×800    | ⬜ Not created | `store-assets/screenshot-2-result.png`                                        |
-| Screenshot 3 [RECOMMENDED]     | 1280×800    | ⬜ Not created | `store-assets/screenshot-3-marked-html.png`                                   |
-| Small Promo Tile [RECOMMENDED] | 440×280     | ⬜ Not created | `store-assets/promo-small.png`                                                |
-| Marquee Promo Tile             | 1400×560    | ⬜ Not created |                                                                               |
+| Asset                          | Dimensions  | Status         | Filename                                                                                  |
+| ------------------------------ | ----------- | -------------- | ----------------------------------------------------------------------------------------- |
+| Store Icon [REQUIRED]          | 128×128 PNG | ✅ Ready       | `store-assets/store-icon-128.png`（圖形 96×96 置中、16px 透明邊，依商店建議）             |
+| Screenshot 1 [REQUIRED]        | 1280×800    | ✅ Ready       | `store-assets/screenshot-1-popup.png`（專案頁 + popup；書籤、網址、頭像、對話側欄已模糊） |
+| Screenshot 2 [RECOMMENDED]     | 1280×800    | ⬜ Not created | `store-assets/screenshot-2-result.png`                                                    |
+| Screenshot 3 [RECOMMENDED]     | 1280×800    | ⬜ Not created | `store-assets/screenshot-3-marked-html.png`                                               |
+| Small Promo Tile [RECOMMENDED] | 440×280     | ⬜ Not created | `store-assets/promo-small.png`                                                            |
+| Marquee Promo Tile             | 1400×560    | ⬜ Not created |                                                                                           |
 
 ### 截圖規劃
 
