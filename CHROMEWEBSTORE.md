@@ -12,7 +12,7 @@
 | manifest 描述 ≤ 132 字元                  | ✅ 已改     | 英文，127 字元                                                                                                                                                                           |
 | 移除非必要權限 `tabs`                     | ✅ 已移除   | `host_permissions` 涵蓋 `claude.ai`，`tabs.query` 在該網域仍讀得到 `tab.url`；其他網站讀不到，正好當「不是專案頁」。**載入未封裝版本後要實測 popup 在專案頁按鈕可用、在其他頁 disabled** |
 | 圖示 128×128                              | ✅ 就緒     | `icons/icon-128.png`，Claude 橘底白色泡泡，不含 Anthropic 商標圖形                                                                                                                       |
-| 隱私權政策公開網址                        | 🟡 待上線   | 內容在 `docs/privacy.md`，需開 GitHub Pages 或放到可公開存取的網址後填入下方                                                                                                             |
+| 隱私權政策公開網址                        | ✅ 已上線   | https://yuritsaitw.github.io/claude-design-comments-exporter/privacy.html（GitHub Pages，來源 `main` 的 `docs/`）                                                                        |
 | 截圖 1280×800 至少一張                    | ⬜ 未建立   | 需在真實 Claude Design 專案頁截圖，見「截圖規劃」                                                                                                                                        |
 | 開發者帳號                                | ⬜ 待辦     | 一次性 5 美元；建議用團隊共用帳號而非個人帳號                                                                                                                                            |
 | 打包 zip                                  | ✅ 腳本就緒 | `pnpm build && pnpm package` → `release/…zip`，只含 `dist/`，排除 source map                                                                                                             |
@@ -138,7 +138,9 @@ The extension reads project content and comments from claude.ai on the user's re
 
 **Privacy Policy URL** [REQUIRED]
 
-待填。內容在 `docs/privacy.md`；建議開 GitHub Pages 後用 `https://<org>.github.io/claude-design-comments-exporter/privacy` 這類穩定網址。提交前先在無痕視窗打開確認不是 404。
+https://yuritsaitw.github.io/claude-design-comments-exporter/privacy.html
+
+來源是 `docs/privacy.md`，由 GitHub Pages 發佈，已驗證回 200。
 
 ## Distribution
 
@@ -151,9 +153,9 @@ The extension reads project content and comments from claude.ai on the user's re
 
 **Contact Email** [REQUIRED]：yuri.hh.tsai@viewsonic.com（會公開顯示，可改成團隊信箱）
 
-**Support URL / Email** [RECOMMENDED]：GitHub repo 的 Issues 頁（repo 推上 GitHub 後填）
+**Support URL / Email** [RECOMMENDED]：https://github.com/YuriTsaiTW/claude-design-comments-exporter/issues
 
-**Homepage URL** [RECOMMENDED]：GitHub repo
+**Homepage URL** [RECOMMENDED]：https://github.com/YuriTsaiTW/claude-design-comments-exporter
 
 ## 提交步驟
 
