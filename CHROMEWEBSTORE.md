@@ -166,9 +166,10 @@ https://yuritsaitw.github.io/claude-design-comments-exporter/privacy.html
 
 ## Version History
 
-| Version | Date       | Changes                                                                       | Status |
-| ------- | ---------- | ----------------------------------------------------------------------------- | ------ |
-| 0.1.0   | 2026-09-11 | 首版：下載官方 zip、加入 comments.json／comments.md、三層元素定位、多候選標記 | Draft  |
+| Version | Date       | Changes                                                                         | Status |
+| ------- | ---------- | ------------------------------------------------------------------------------- | ------ |
+| 0.1.1   | 2026-09-15 | 留言的 data-comment-anchor 沒被匯出時改用 data-om-id 定位；九則真實留言全部定位 | Draft  |
+| 0.1.0   | 2026-09-11 | 首版：下載官方 zip、加入 comments.json／comments.md、三層元素定位、多候選標記   | Draft  |
 
 ## Review Notes
 
