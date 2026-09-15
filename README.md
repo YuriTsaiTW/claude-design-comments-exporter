@@ -14,12 +14,14 @@ Claude Design 的 Download 只給頁面，留言留在雲端。沒有專案權�
 
 ## 使用
 
-1. 在 `chrome://extensions` 開啟開發人員模式，載入未封裝項目，選 `dist/`
+1. 到 [Chrome Web Store](https://chromewebstore.google.com/detail/fipkmheaflhlajpajmpppcjmpodabofi) 安裝。安裝時若看到「安全瀏覽強化防護功能不信任這個擴充功能」，那是新開發者帳號的通用標記，不是審查結果；按「繼續安裝」即可，程式碼全部公開在這個 repo
 2. 開啟你有權限的 Claude Design 專案頁（`claude.ai/design/p/…`）
 3. 點工具列圖示，按「下載 zip + comments」。popup 可以關掉，匯出在背景繼續
 4. 拿到 `<專案名>-with-comments.zip`
 
 只用你瀏覽器裡既有的 claude.ai 登入，不需要任何 API key，不連線到 claude.ai 以外的地方。
+
+想用開發中的版本，`pnpm build` 後在 `chrome://extensions` 開啟開發人員模式、載入未封裝項目選 `dist/`。
 
 ## 三個難題
 
