@@ -45,6 +45,6 @@ pnpm lint
 pnpm package          # 打包成上架用 zip 到 release/
 ```
 
-留言透過 Claude Design 的 `ListComments` 端點以 JSON 取得，官方 zip 走 `…/projects/{id}/download`；元素定位用 parse5 加 css-select，只插入屬性不重新序列化；`data-dc-tpl` 錨點依 support.js 的前序編號規則還原。細節見程式碼註解與 `tests/`。
+留言透過 Claude Design 的 `ListComments` 端點以 JSON 取得，官方 zip 走 `…/projects/{id}/download`；元素定位用 parse5 加 css-select，只插入屬性不重新序列化；`data-dc-tpl` 錨點依 support.js 的前序編號規則還原；`data-comment-anchor` 沒被匯出時，改用留言描述裡的 `data-om-id` 序號（來源檔前序序號）加上描述的標籤、位置與子元素比對。細節見程式碼註解與 `tests/`。
 
 上架 Chrome Web Store 的欄位與待辦見 [`CHROMEWEBSTORE.md`](CHROMEWEBSTORE.md)，隱私權政策見 [docs/privacy.md](docs/privacy.md)。本工具為獨立開發，與 Anthropic 無關。

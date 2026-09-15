@@ -1,6 +1,6 @@
 {
   "name": "claude-design-comments-exporter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Chrome 擴充功能：把 Claude Design 專案匯出成官方 zip 加上留言（comments.json / comments.md），並在留言關聯的元素標上 data-comment-id。",
   "type": "module",

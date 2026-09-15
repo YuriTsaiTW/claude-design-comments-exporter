@@ -269,3 +269,22 @@ describe('injectCommentIds：真實第 2 頁的 data-dc-tpl 留言', () => {
     expect(stripInjected(result.html)).toBe(html);
   });
 });
+
+describe('injectCommentIds：data-comment-anchor 沒匯出時改用 om-id', () => {
+  it('第 10 頁的 text-field 留言標到名字輸入列', () => {
+    const html = fixture('real-page-10-v2.dc.html');
+    const result = injectCommentIds(html, [
+      {
+        ...comment('746cd058', '[data-comment-anchor="c20e508c07-div"]'),
+        elementDescriptor:
+          'react:    10 原型_訪客班級流程\ndom:      body › div#dc-root › div.sc-host › div › div › div › div › div › div › div › div[2/2]\nchildren: input, div\nselector: [data-om-id="af6b129d:55"]\nid:       cc-6',
+      },
+    ]);
+
+    expect(result.anchoredIds).toEqual(['746cd058']);
+    expect(result.candidates.get('746cd058')).toEqual([
+      { tag: 'div', line: 93 },
+    ]);
+    expect(stripInjected(result.html)).toBe(html);
+  });
+});

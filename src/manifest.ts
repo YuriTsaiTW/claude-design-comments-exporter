@@ -3,7 +3,7 @@ import { defineManifest } from '@crxjs/vite-plugin';
 export default defineManifest({
   manifest_version: 3,
   name: 'Comments Exporter for Claude Design',
-  version: '0.1.0',
+  version: '0.1.1',
   description:
     'Download a Claude Design project as a zip with comments.json / comments.md and data-comment-id marks on the commented elements.',
   minimum_chrome_version: '116',

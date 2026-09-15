@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/viewsonic-design-system-v1-0-0-b9dd1e09-f04f-4824-9ec9-3fff6e0ae44c/colors_and_type.css">
+<link rel="stylesheet" href="_ds/viewsonic-design-system-v1-0-0-b9dd1e09-f04f-4824-9ec9-3fff6e0ae44c/packages/design-token/src/foundation/index.css">
+<link rel="stylesheet" href="_ds/viewsonic-design-system-v1-0-0-b9dd1e09-f04f-4824-9ec9-3fff6e0ae44c/packages/design-token/src/design-kit/default/component/chips/_base.css">
+<link rel="stylesheet" href="_ds/viewsonic-design-system-v1-0-0-b9dd1e09-f04f-4824-9ec9-3fff6e0ae44c/packages/design-token/src/design-kit/default/style/main.css">
+<script src="_ds/viewsonic-design-system-v1-0-0-b9dd1e09-f04f-4824-9ec9-3fff6e0ae44c/_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:#e7e5df;}
+  a{color:#4848f0;} a:hover{color:#3b3bd1;}
+  @keyframes gIn {from{transform:translateY(10px); opacity:0;}to{transform:translateY(0); opacity:1;}}
+  @keyframes gSpin {to{transform:rotate(360deg);}}
+  @keyframes gPulse {0%,100%{opacity:.4; transform:scale(1);}50%{opacity:1; transform:scale(1.3);}}
+  .inline-flex{display:inline-flex;} .shrink-0{flex-shrink:0;} .items-center{align-items:center;}
+  .select-none{user-select:none;} .border-solid{border-style:solid;} .rounded-full{border-radius:9999px;}
+  .bg-transparent{background:transparent;}
+  .h-vsds-chips-default-sm-h{height:var(--vsds-comp-chips-default-sm-height,20px);}
+  .px-vsds-chips-default-sm-px{padding-inline:var(--vsds-comp-chips-default-sm-padding-left,8px);}
+  .gap-vsds-chips-default-sm-gap{gap:var(--vsds-comp-chips-default-sm-gap,4px);}
+  .border-vsds-chips-default-sm{border-width:var(--vsds-comp-chips-default-sm-border,1px);}
+  .border-vsds-surface-300{border-color:var(--vsds-sys-color-surface-300,#e5e5e5);}
+  .text-vsds-text-100{color:var(--vsds-sys-color-text-100,#333);}
+  .text-vsds-label-xs{font-size:11px; line-height:1.2;}
+  .tracking-vsds-label-xs{letter-spacing:.04em;}
+  .font-vsds-medium{font-weight:500;}
+  .font-vsds-sans{font-family:var(--vsds-foun-font-family-sans);}
+  .justify-center{justify-content:center;} .flex{display:flex;} .border-transparent{border-color:transparent;}
+  .bg-vsds-primary{background:var(--vsds-sys-color-primary,#4848f0);}
+  .text-vsds-on-primary{color:var(--vsds-sys-color-on-primary,#fff);}
+  .bg-vsds-secondary{background:var(--vsds-sys-color-secondary,#212194);}
+  .text-vsds-on-secondary{color:var(--vsds-sys-color-on-secondary,#fff);}
+  .size-vsds-chips-default-sm-icon{width:var(--vsds-comp-chips-default-sm-icon,12px); height:var(--vsds-comp-chips-default-sm-icon,12px);}
+  .size-vsds-chips-default-sm-icon svg{max-width:100%; max-height:100%;}
+  .block{display:block;} .w-full{width:100%;}
+  .bg-vsds-outline{background:var(--vsds-sys-color-outline,#e5e5e5);}
+  .h-vsds-divider-border{height:var(--vsds-comp-divider-border,1px);}
+  [data-roster-grid]{scrollbar-width:none; -ms-overflow-style:none;}
+  [data-roster-grid]::-webkit-scrollbar{width:0; height:0; -webkit-appearance:none;}
+</style>
+</helmet>
+
+<div data-vsds-kit="classswift-hub" style="display:flex; flex-direction:column; height:100vh; font-family:var(--vsds-foun-font-family-sans); overflow:hidden;">
+
+  <div style="flex:none; background:#16162b; color:#fff; display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; padding:8px 16px;">
+    <span style="font-size:12px; font-weight:700; letter-spacing:.08em; color:#9191f6; margin-right:auto;">CSV 班級 ROSTER CLASS · PROTOTYPE</span>
+    <sc-for list="{{ stepChips }}" as="c" hint-placeholder-count="3">
+      <div onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</div>
+    </sc-for>
+    <div onClick="{{ toggleSize }}" style="{{ sizeChipStyle }}">{{ sizeLabel }}</div>
+    <div onClick="{{ reset }}" style="{{ chipOff }}">Reset seats</div>
+  </div>
+
+  <div style="flex:1; min-height:0; display:flex;">
+
+    <div style="flex:1; min-width:0; display:flex; flex-direction:column; background:#f6f6f6; overflow:hidden;">
+
+      <div style="flex:none; height:56px; background:#fff; border-bottom:1px solid #e6e8f1; display:flex; align-items:center; justify-content:space-between; padding:0 18px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          <img src="uploads/myViewBoard_v3_A.png" alt="myViewBoard" style="height:30px; width:auto; object-fit:contain;">
+          <span style="display:inline-flex; align-items:center; height:20px; padding:0 9px; border-radius:9999px; background:#ededfd; color:#3b3bd1; font-size:11px; font-weight:800; letter-spacing:.07em;">ROSTER</span>
+        </div>
+        <span style="font-size:13px; font-weight:700; color:#9a9ab0;">{{ headerRight }}</span>
+      </div>
+
+      <div style="flex:1; min-height:0; overflow:auto; display:flex; align-items:center; justify-content:center; padding:28px 20px;">
+
+        <sc-if value="{{ atEntry }}" hint-placeholder-val="{{ false }}">
+          <div style="width:100%; max-width:420px; background:#fff; border:1px solid #ececf3; border-radius:18px; padding:26px; display:flex; flex-direction:column; align-items:center; gap:16px; animation:gIn .24s ease-out both;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+              <span style="font-size:22px; font-weight:800; color:#16162b; letter-spacing:-.01em;">Join your class</span>
+              <span style="font-size:14px; line-height:1.55; color:#6a6a80; text-align:center; text-wrap:pretty; max-width:34ch;">Type the class code your teacher shows on the board.</span>
+            </div>
+            <div style="width:100%; display:flex; flex-direction:column; gap:7px;">
+              <span style="font-size:11px; font-weight:800; letter-spacing:.08em; color:#9a9ab0;">CLASS CODE</span>
+              <input value="{{ code }}" onChange="{{ onCode }}" placeholder="0000 0000" inputMode="numeric" style="{{ codeInputStyle }}">
+            </div>
+            <div onClick="{{ submitCode }}" style="{{ joinBtnStyle }}">Join class</div>
+            <span style="font-size:12.5px; color:#a4a4b8;">The code is on the classroom screen — 8 digits.</span>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ atChecking }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center;">
+            <span style="width:46px; height:46px; border-radius:50%; border:4px solid #dcdcf8; border-top-color:#4848f0; animation:gSpin .9s linear infinite;"></span>
+            <div style="display:flex; flex-direction:column; gap:5px;">
+              <span style="font-size:19px; font-weight:800; color:#16162b;">{{ checkTitle }}</span>
+              <span style="font-size:14px; color:#6a6a80;">{{ checkSub }}</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ atPick }}" hint-placeholder-val="{{ true }}">
+          <div style="width:100%; max-width:{{ pickCardMax }}; background:#fff; border:1px solid #ececf3; border-radius:18px; padding:26px; display:flex; flex-direction:column; gap:16px; animation:gIn .24s ease-out both;">
+            <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" style="flex:none;">
+                <path d="M12.5215 16.4004C13.7169 16.4004 14.8372 16.6414 15.6855 17.0654C16.4889 17.4673 17.2715 18.1612 17.2715 19.1504C17.2715 19.6504 17.3094 20.5575 16.4609 21.1719C16.0831 21.4452 15.5842 21.6203 14.9668 21.7314C14.3434 21.8436 13.5438 21.9004 12.5215 21.9004C11.4992 21.9004 10.6995 21.8436 10.0762 21.7314C9.4588 21.6203 8.95984 21.4452 8.58203 21.1719C7.73366 20.5575 7.77148 19.6504 7.77148 19.1504C7.77148 18.1613 8.55409 17.4673 9.35742 17.0654C10.2057 16.6414 11.3261 16.4005 12.5215 16.4004Z" fill="#4848F0"></path>
+                <path d="M16.0049 2.01074C17.0134 2.11318 17.8008 2.96448 17.8008 4V7.74219C17.6043 7.71435 17.4034 7.7002 17.1992 7.7002C16.8552 7.70025 16.5206 7.74112 16.2002 7.81836V4C16.2002 3.77922 16.0215 3.59982 15.8008 3.59961H5C4.77909 3.59961 4.59961 3.77909 4.59961 4V16.5996C4.59961 16.8205 4.77909 17 5 17H7.35449C7.01336 17.4363 6.7438 17.9656 6.64355 18.5996H5C3.89543 18.5996 3 17.7042 3 16.5996V4C3 2.96435 3.78722 2.113 4.7959 2.01074L5 2H15.8008L16.0049 2.01074Z" fill="#4848F0"></path>
+                <path d="M12.5215 10.2002C14.0401 10.2004 15.2715 11.4316 15.2715 12.9502C15.2715 14.4688 14.0401 15.7 12.5215 15.7002C11.0028 15.7001 9.77148 14.4689 9.77148 12.9502C9.77148 11.4315 11.0028 10.2003 12.5215 10.2002Z" fill="#4848F0"></path>
+                <path d="M9.58105 10.2002C9.20236 10.6636 8.91727 11.2062 8.75488 11.7998H7.2002C6.75837 11.7998 6.40039 11.4418 6.40039 11C6.40039 10.5582 6.75837 10.2002 7.2002 10.2002H9.58105Z" fill="#4848F0"></path>
+                <path d="M13.2002 6.2002C13.6419 6.20029 14 6.55823 14 7C14 7.44177 13.6419 7.79971 13.2002 7.7998H7.2002C6.75837 7.7998 6.40039 7.44183 6.40039 7C6.40039 6.55817 6.75837 6.2002 7.2002 6.2002H13.2002Z" fill="#4848F0"></path>
+                <g opacity="0.64">
+                  <path d="M17.1995 15.3994C18.3952 15.3994 19.5151 15.6402 20.3635 16.0645C21.167 16.4663 21.9495 17.1601 21.9495 18.1494C21.9495 18.6496 21.9874 19.5567 21.1389 20.1709C20.761 20.4443 20.2623 20.6194 19.6448 20.7305C19.0213 20.8426 18.2221 20.8994 17.1995 20.8994C16.1768 20.8994 15.3776 20.8427 14.7542 20.7305C14.1365 20.6193 13.6379 20.4444 13.26 20.1709C12.4116 19.5567 12.4495 18.6496 12.4495 18.1494C12.4495 17.1603 13.2321 16.4663 14.0354 16.0645C14.8838 15.6403 16.0039 15.3994 17.1995 15.3994Z" fill="#4848F0"></path>
+                  <path d="M17.1995 9.19922C18.7183 9.19922 19.9495 10.4304 19.9495 11.9492C19.9495 13.468 18.7183 14.6992 17.1995 14.6992C15.6808 14.6991 14.4495 13.4679 14.4495 11.9492C14.4495 10.4305 15.6808 9.19936 17.1995 9.19922Z" fill="#4848F0"></path>
+                </g>
+              </svg>
+              <span style="font-size:21px; font-weight:700; color:#16162b; letter-spacing:-.01em;">Select your name to join</span>
+            </div>
+
+            <div style="position:relative; border-radius:14px; padding:10px;">
+              <div data-roster-grid="true" ref="{{ gridRef }}" onScroll="{{ onGridScroll }}" style="{{ gridStyle }}">
+              <sc-for list="{{ seats }}" as="s" hint-placeholder-count="10">
+                <div onClick="{{ s.onClick }}" style="{{ s.style }}" title="{{ s.name }}">
+                  <span style="min-width:0; flex:1; font-size:13px; font-weight:600; color:{{ s.nameColor }}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:left;">{{ s.name }}</span>
+                  <div style="flex:none; width:74px; display:flex; justify-content:flex-end; align-items:center;">
+                    <sc-if value="{{ s.locked }}" hint-placeholder-val="{{ false }}">
+                      <div style="pointer-events:none; --vsds-sys-color-secondary:#DADAFC; --vsds-sys-color-secondary-variant:#DADAFC; --vsds-sys-color-on-secondary:#333333;">
+                        <x-import component-from-global-scope="ViewSonicDesignSystemV100_b9dd1e.Chip" size="sm" type="filled" semantic-color="secondary" icon="{{ joinedIcon }}" hint-size="70px,20px">Joined</x-import>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ s.selected }}" hint-placeholder-val="{{ false }}">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4848f0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M4.5 12.5l5 5 10-11"></path></svg>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+              </div>
+              <div style="{{ trackStyle }}"></div>
+              <div style="{{ thumbStyle }}"></div>
+            </div>
+            <div onClick="{{ confirmSeat }}" style="{{ confirmBtnStyle }}">{{ confirmBtnLabel }}</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ atTakenAlert }}" hint-placeholder-val="{{ false }}">
+          <div style="width:100%; max-width:390px; background:#fff; border:1px solid #ececf3; border-radius:18px; padding:26px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; animation:gIn .2s ease-out both;">
+            <div style="width:56px; height:56px; border-radius:50%; background:#fdeeee; display:flex; align-items:center; justify-content:center;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#b3312c" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5"></path><path d="M12 16.5h.01"></path></svg>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:5px;">
+              <span style="font-size:19px; font-weight:800; color:#16162b;">{{ takenTitle }}</span>
+              <span style="font-size:13.5px; line-height:1.55; color:#6a6a80; text-wrap:pretty;">Someone on another device just took this seat. Pick your own name, or ask your teacher for help.</span>
+            </div>
+            <div onClick="{{ backToPick }}" style="width:100%; height:46px; border-radius:9999px; background:#4848f0; color:#fff; font-size:14.5px; font-weight:700; display:flex; align-items:center; justify-content:center; cursor:pointer;" style-hover="background:#3b3bd1;">Back to the class list</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ atInClass }}" hint-placeholder-val="{{ false }}">
+          <div style="width:100%; max-width:400px; background:#fff; border:1px solid #ececf3; border-radius:18px; padding:26px; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; animation:gIn .24s ease-out both;">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:20px; font-weight:800; color:#16162b;">Hi, {{ meFirst }}!</span>
+              <span style="font-size:13px; color:#9a9ab0;">History 302 · Ms. Smith</span>
+            </div>
+            <div style="display:flex; gap:7px; padding:6px 0;">
+              <span style="width:8px; height:8px; border-radius:50%; background:#4848f0; animation:gPulse 1.2s ease-in-out infinite;"></span>
+              <span style="width:8px; height:8px; border-radius:50%; background:#4848f0; animation:gPulse 1.2s ease-in-out .2s infinite;"></span>
+              <span style="width:8px; height:8px; border-radius:50%; background:#4848f0; animation:gPulse 1.2s ease-in-out .4s infinite;"></span>
+            </div>
+            <span style="font-size:15px; font-weight:700; color:#3a3a52; text-wrap:pretty;">You're in — waiting for your teacher to send the first question</span>
+            <span style="font-size:13px; color:#9a9ab0;">{{ inClassCount }}</span>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+
+    <div style="flex:none; width:290px; background:#fff; border-left:1px solid #e6e8f1; display:flex; flex-direction:column; overflow:auto;">
+      <div style="padding:16px 18px 10px; display:flex; flex-direction:column; gap:3px;">
+        <span style="font-size:11px; font-weight:800; letter-spacing:.08em; color:#9a9ab0;">FLOW</span>
+        <span style="font-size:15px; font-weight:800; color:#16162b;">CSV 班級加入流程</span>
+        <span style="font-size:12px; line-height:1.5; color:#9a9ab0; text-wrap:pretty;">老師以 CSV 匯入名單，學生從名單認領自己的座位；已被認領的座位不可選。</span>
+      </div>
+      <div style="padding:0 12px 18px; display:flex; flex-direction:column; gap:4px;">
+        <sc-for list="{{ flowNodes }}" as="n" hint-placeholder-count="3">
+          <div style="{{ n.style }}">
+            <span style="flex:none; width:20px; font-size:11px; font-weight:800; color:{{ n.numColor }};">{{ n.num }}</span>
+            <div style="min-width:0; display:flex; flex-direction:column; gap:1px;">
+              <span style="font-size:13px; font-weight:700; color:{{ n.titleColor }};">{{ n.title }}</span>
+              <span style="font-size:11.5px; line-height:1.45; color:#9a9ab0;">{{ n.note }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:auto; padding:14px 18px 18px; border-top:1px solid #eef0f6; display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:11px; font-weight:800; letter-spacing:.08em; color:#9a9ab0;">RELATED</span>
+        <a href="10 原型_訪客班級流程.dc.html" style="font-size:13px; font-weight:700; text-decoration:none;">10 訪客班級流程 →</a>
+        <a href="09 原型_加入班級流程 v2.dc.html" style="font-size:13px; font-weight:700; text-decoration:none;">09 加入班級流程 v2 →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1240,&quot;height&quot;:880}}">
+class Component extends DCLogic {
+  constructor(p){
+    super(p);
+    this.ROSTER=[
+      'Emma Johnson','Liam Anderson','Olivia Martinez','Noah Thompson','Ava Williams',
+      'Ethan Brooks','Sophia Reynolds','Mason Carter','Isabella Nguyen','Jackson Miller',
+      'Maximiliana Fitzgerald-Whitmore Jr.','Konstantinos Papadopoulos-Andersen'
+    ];
+    this.ROSTER30=[].concat(this.ROSTER,[
+      'Amelia Foster','Lucas Bennett','Harper Coleman','Elijah Ramirez','Charlotte Hayes',
+      'Benjamin Wright','Mia Sullivan','Henry Patterson','Evelyn Griffin','Sebastian Cole',
+      'Abigail Morgan','Owen Fitzgerald','Ella Sanders','Daniel Whitaker','Scarlett Dawson',
+      'Matthew Ellison','Grace Donovan','Julian Barnes','Chloe Prescott','Nathan Holloway'
+    ]).sort((a,b)=>a.localeCompare(b));
+    this.ROSTER=this.ROSTER.slice().sort((a,b)=>a.localeCompare(b));
+    this.TAKEN=['Liam Anderson','Ava Williams','Mason Carter','Konstantinos Papadopoulos-Andersen'];
+    this.TAKEN30=this.TAKEN.concat(['Harper Coleman','Benjamin Wright','Evelyn Griffin','Owen Fitzgerald','Grace Donovan','Nathan Holloway','Lucas Bennett']);
+    this.STEPS=[['entry','Class code'],['pick','Find your name'],['inclass','In class']];
+    this.gridRef=React.createRef();
+    this.state={ step:'pick', code:'', size:10, taken:this.TAKEN.slice(), sel:null, me:null, conflict:null, q:'' };
+  }
+  componentWillUnmount(){ clearTimeout(this._t); }
+  measureGrid(){ const el=this.gridRef&&this.gridRef.current; if(!el) return;
+    const m={sTop:el.scrollTop, sH:el.scrollHeight, cH:el.clientHeight};
+    const S=this.state; if(S.sTop!==m.sTop||S.sH!==m.sH||S.cH!==m.cH) this.setState(m); }
+  componentDidMount(){ this.measureGrid(); }
+  componentDidUpdate(){ this.measureGrid(); }
+  go(step, extra){ clearTimeout(this._t); this.setState(Object.assign({step:step}, extra||{})); }
+  renderVals(){
+    const S=this.state, st=S.step, taken=S.taken||[];
+    const chip=(on)=>'flex:none; white-space:nowrap; height:30px; padding:0 12px; border-radius:8px; font-size:12.5px; font-weight:600; display:flex; align-items:center; cursor:pointer; color:#dadafc; border:1px solid '+(on?'#4848f0':'#3a3a5e')+'; background:'+(on?'#2a2a8c':'transparent')+';';
+    const codeOk=S.code.replace(/\D/g,'').length>=8;
+    const node=(num,title,note,active,done)=>({num,title,note,
+      style:'display:flex; gap:8px; padding:9px 10px; border-radius:10px; background:'+(active?'#ededfd':'transparent')+'; border:1px solid '+(active?'#c9c9f7':'transparent')+';',
+      numColor:active?'#4848f0':(done?'#9a9ab0':'#c9c9d6'),
+      titleColor:active?'#2a2a8c':(done?'#3a3a52':'#9a9ab0')});
+    const roster=(S.size===30?this.ROSTER30:this.ROSTER);
+    const free=roster.length-taken.length;
+    const q=(S.q||'').trim().toLowerCase();
+    const shown=q?roster.filter(n=>n.toLowerCase().indexOf(q)>=0):roster;
+
+    const cH=S.cH||0, sH=S.sH||0, sTop=S.sTop||0, scrollable=sH>cH+2;
+    const thumbH=scrollable?Math.max(28, Math.round(cH*cH/sH)):0;
+    const thumbTop=scrollable?Math.round((sTop/(sH-cH))*(cH-thumbH))+10:0;
+
+    return {
+      gridRef:this.gridRef,
+      onGridScroll:()=>this.measureGrid(),
+      trackStyle:'position:absolute; right:5px; top:10px; bottom:10px; width:3px; border-radius:2px; background:#f7f7fa; pointer-events:none; display:'+(scrollable?'block':'none')+';',
+      thumbStyle:'position:absolute; right:5px; width:3px; border-radius:2px; background:#dedee8; pointer-events:none; height:'+thumbH+'px; top:'+thumbTop+'px; display:'+(scrollable?'block':'none')+';',
+      chipOff:chip(false),
+      sizeLabel:'Roster: '+roster.length+' students',
+      sizeChipStyle:chip(S.size===30),
+      toggleSize:()=>{ const n=(S.size===10?30:10);
+        this.setState({size:n, taken:(n===30?this.TAKEN30:this.TAKEN).slice(), sel:null, me:null, conflict:null, q:'', step:'pick'}); },
+      isBig:S.size===30,
+      pickCardMax:(S.size===30?'800px':'560px'),
+      q:S.q,
+      onQ:(e)=>this.setState({q:e.target.value}),
+      searchStyle:'width:100%; height:44px; padding:0 14px; border-radius:10px; border:1.5px solid #d4d6e4; background:#fafafd; font-family:inherit; font-size:14.5px; color:#16162b; outline:none;',
+      joinedIcon:React.createElement('svg',{viewBox:'0 0 24 24',fill:'none',width:12,height:12},
+        React.createElement('path',{key:'a',fillRule:'evenodd',clipRule:'evenodd',fill:'currentColor',d:'M10.2221 2.19922C8.0621 2.19922 6.31104 3.95028 6.31104 6.11033C6.31104 8.27038 8.0621 10.0214 10.2221 10.0214C12.3822 10.0214 14.1333 8.27038 14.1333 6.11033C14.1333 3.95028 12.3822 2.19922 10.2221 2.19922ZM7.91104 6.11033C7.91104 4.83394 8.94576 3.79922 10.2221 3.79922C11.4985 3.79922 12.5333 4.83394 12.5333 6.11033C12.5333 7.38672 11.4985 8.42144 10.2221 8.42144C8.94576 8.42144 7.91104 7.38672 7.91104 6.11033Z'}),
+        React.createElement('path',{key:'b',fill:'currentColor',d:'M4.79944 15.4434C4.79944 14.8727 5.21163 14.1995 6.21889 13.624C7.20347 13.0613 8.61701 12.6879 10.2217 12.6879C10.8475 12.6879 11.4443 12.7447 11.9979 12.8474C12.4117 12.3495 12.8984 11.9143 13.4417 11.5583C12.4702 11.2547 11.3724 11.0879 10.2217 11.0879C8.3901 11.0879 6.69252 11.5105 5.42505 12.2348C4.18025 12.9461 3.19944 14.0507 3.19944 15.4434L3.19933 15.5418C3.19784 16.446 3.19579 17.6875 4.26727 18.5739C4.79428 19.0099 5.51779 19.3087 6.4633 19.5032C7.41195 19.6982 8.63815 19.799 10.2217 19.799C10.5371 19.799 10.8384 19.795 11.1261 19.7871C10.8891 19.2886 10.7137 18.7553 10.6096 18.1968C10.4834 18.1983 10.3541 18.199 10.2217 18.199C8.69407 18.199 7.58694 18.1007 6.78558 17.936C5.98109 17.7705 5.53794 17.5486 5.28717 17.3411C4.8425 16.9732 4.79944 16.4961 4.79944 15.4434Z'}),
+        React.createElement('path',{key:'c',fillRule:'evenodd',clipRule:'evenodd',fill:'currentColor',d:'M16.9995 21.999C19.7609 21.999 21.9995 19.7604 21.9995 16.999C21.9995 14.2376 19.7609 11.999 16.9995 11.999C14.2381 11.999 11.9995 14.2376 11.9995 16.999C11.9995 19.7604 14.2381 21.999 16.9995 21.999ZM14.4691 16.7494C14.762 16.4564 15.2368 16.4564 15.5298 16.7492L16.2192 17.4384L18.6889 14.9687C18.9818 14.6758 19.4567 14.6758 19.7496 14.9687C20.0425 15.2616 20.0425 15.7365 19.7496 16.0294L16.7496 19.0294C16.4567 19.3222 15.9819 19.3223 15.689 19.0294L14.4693 17.81C14.1763 17.5172 14.1763 17.0423 14.4691 16.7494Z'})),
+      gridStyle:'display:grid; grid-template-columns:repeat('+(S.size===30?3:2)+',minmax(0,1fr)); gap:10px; overflow-y:scroll; scrollbar-gutter:stable; padding-right:8px; max-height:'+(S.size===30?230:290)+'px;',
+      emptyStyle:'font-size:13.5px; color:#9a9ab0; padding:6px 2px; display:'+(shown.length?'none':'block')+';',
+      stepChips:this.STEPS.map(s=>({ label:s[1], onClick:()=>this.go(s[0]),
+        style:chip(st===s[0] || (s[0]==='entry'&&st==='checking') || (s[0]==='pick'&&st==='taken')) })),
+      reset:()=>this.go('pick', {taken:(S.size===30?this.TAKEN30:this.TAKEN).slice(), sel:null, me:null, conflict:null, code:'', q:''}),
+      headerRight:(st==='inclass'?'History 302 · Ms. Smith':'Roster class — pick your name'),
+      atEntry:st==='entry', atChecking:st==='checking', atPick:st==='pick',
+      atTakenAlert:st==='taken', atInClass:st==='inclass',
+
+      code:S.code,
+      onCode:(e)=>{ let v=e.target.value.replace(/\D/g,'').slice(0,8); if(v.length>4) v=v.slice(0,4)+' '+v.slice(4); this.setState({code:v}); },
+      codeInputStyle:'width:100%; height:52px; padding:0 16px; border-radius:10px; border:1.5px solid #d4d6e4; background:#fafafd; font-family:inherit; font-size:20px; font-weight:700; letter-spacing:.14em; color:#16162b; outline:none;',
+      joinBtnStyle:'width:100%; height:50px; border-radius:9999px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; cursor:pointer; '+(codeOk?'background:#4848f0; color:#fff;':'background:#ededfd; color:#8f8fc4;'),
+      submitCode:()=>{ if(!codeOk) return; this.setState({step:'checking'}); clearTimeout(this._t); this._t=setTimeout(()=>this.go('pick'), 1200); },
+
+      checkTitle:'Loading the class list…',
+      checkSub:'History 302 · '+roster.length+' students',
+
+      seatCount:free+' of '+roster.length+' seats open',
+      seats:shown.map(n=>{
+        const locked=taken.indexOf(n)>=0, sel=S.sel===n;
+        return { name:n, locked:locked, selected:sel,
+          nameColor:(locked?'#a8a8ba':(sel?'#2a2a8c':'#16162b')),
+          noteColor:(locked?'#b8b8c8':(sel?'#4848f0':'#9a9ab0')),
+          onClick:()=>{ if(!locked) this.setState({sel:sel?null:n}); },
+          style:'display:flex; align-items:center; gap:8px; height:50px; padding:0 13px; border-radius:14px; transition:border-color .15s,background .15s; cursor:'+(locked?'not-allowed':'pointer')+'; background:'+(locked?'#f7f7f9':(sel?'#f3f3fe':'#fff'))+'; border:1.6px solid '+(locked?'#E5E5E5':(sel?'#4848f0':'#E5E5E5'))+';' };
+      }),
+      confirmBtnLabel:'Join class',
+      confirmBtnStyle:'margin-top:8px; width:100%; height:50px; border-radius:9999px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; cursor:pointer; '+(S.sel?'background:#4848f0; color:#fff;':'background:#ebebeb; color:#b2b2b2; cursor:not-allowed;'),
+      confirmSeat:()=>{ if(!S.sel) return;
+        if(taken.indexOf(S.sel)>=0) return this.go('taken', {conflict:S.sel});
+        this.go('inclass', {me:S.sel, taken:taken.concat(S.sel)});
+      },
+
+      takenTitle:(S.conflict||'This seat')+' is taken',
+      backToPick:()=>this.go('pick', {sel:null, conflict:null}),
+
+      meFirst:(S.me||'Guest').split(' ')[0],
+      inClassCount:(taken.length-1)+' classmates are in the room',
+
+      flowNodes:[
+        node('01','輸入班級代碼','8 位數字 · 載入 CSV 名單', st==='entry'||st==='checking', st!=='entry'),
+        node('02','從名單認領座位','已被認領的名字不可點選', st==='pick'||st==='taken', st==='inclass'),
+        node('03','進入班級','等待老師派第一題', st==='inclass', false)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

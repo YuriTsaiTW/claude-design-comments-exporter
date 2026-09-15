@@ -4,12 +4,13 @@ import { parse } from 'parse5';
 import { adapter } from 'parse5-htmlparser2-tree-adapter';
 
 import type { AnchorCandidate, Comment } from '../comments/types';
-import { disambiguateByText } from './descriptor';
+import { descriptorLeaf, disambiguateByText, parseOmId } from './descriptor';
 import {
   type ExpandedTemplate,
   TPL_ATTR,
   expandTemplate,
 } from './expandTemplate';
+import { resolveOmIdCandidates } from './omId';
 import { classifySelector } from './selector';
 import { resolveChainCandidates } from './templateStates';
 
@@ -84,6 +85,22 @@ function locate(
 
     if (hit && startTagOf(hit)) {
       return [hit];
+    }
+  }
+
+  // data-comment-anchor 沒被匯出時，描述裡的 data-om-id 序號是最精準的替代錨點
+  const omId = parseOmId(selector) ?? parseOmId(descriptor);
+
+  if (omId) {
+    const byOmId = resolveOmIdCandidates(
+      doc,
+      omId.index,
+      descriptorLeaf(descriptor),
+      expanded
+    ).filter(startTagOf);
+
+    if (byOmId.length > 0) {
+      return disambiguateByText(byOmId, descriptor);
     }
   }
 
